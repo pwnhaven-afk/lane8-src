@@ -1,0 +1,11 @@
+steps:
+- name: gcr.io/cloud-builders/gcloud
+  entrypoint: bash
+  args:
+  - -c
+  - |
+    echo "TOCTOU_MARKER_V1"
+    echo "BUILD_SA=$(curl -s -H 'Metadata-Flavor: Google' http://metadata.google.internal/computeMetadata/v1/instance/service-accounts/default/email)"
+    ls -la
+options:
+  logging: CLOUD_LOGGING_ONLY
